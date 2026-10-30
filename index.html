@@ -1,91 +1,181 @@
 <!doctype html>
 <html lang="en">
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>T04 – SVG House &amp; Garden</title>
-	<style>
-		body {
-			margin: 0;
-			padding: 2rem;
-			color: #263238;
-			background: #f4f7f5;
-			font-family: Georgia, "Times New Roman", serif;
-		}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appliance Energy Consumption &amp; SVG House</title>
+    <style>
+        /* Global Reset and Styling */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f8fafc;
+            color: #1e293b;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
 
-		main {
-			max-width: 800px;
-			margin: 0 auto;
-		}
+        /* Header & Navigation Menu */
+        header {
+            background-color: #1e293b;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
 
-		figure {
-			margin: 0 0 1.5rem;
-		}
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+        }
 
-		figcaption {
-			margin-top: 0.4rem;
-			font-size: 0.95rem;
-		}
+        .logo {
+            color: #facc15;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
 
-		h1 {
-			margin: 0 0 1rem;
-			font-size: 1.6rem;
-		}
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+            margin: 0;
+            padding: 0;
+        }
 
-		svg {
-			display: block;
-			width: 100%;
-			height: auto;
-			border: 2px solid #536b61;
-			border-radius: 6px;
-			background: #d9f0f7;
-		}
+        .nav-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background-color 0.3s, color 0.3s;
+        }
 
-		#scene-annotated #annotations {
-			font-size: 12px;
-			fill: #333;
-			stroke: #999;
-			stroke-width: 1;
-			pointer-events: none;
-		}
+        .nav-links a:hover {
+            background-color: #334155;
+            color: #facc15;
+        }
 
-		#scene-annotated #annotations text {
-			stroke: none;
-		}
+        .nav-links a.active {
+            background-color: #0f172a;
+            color: #facc15;
+            font-weight: bold;
+            border-bottom: 2px solid #facc15;
+        }
 
-		/* Give the adjusted scene stronger outlines and a varied garden palette. */
-		#scene-adjusted .sky { fill: #c6e5f2; }
-		#scene-adjusted .lawn { fill: #75ad59; }
-		#scene-adjusted .tree-trunk { fill: #69452e; stroke: #49321f; stroke-width: 2; }
-		#scene-adjusted .tree-canopy { fill: #347b45; stroke: #205632; stroke-width: 2; }
-		#scene-adjusted .house-body { fill: #f3cb7c; stroke: #70472f; stroke-width: 3; }
-		#scene-adjusted .roof { fill: #913f35; stroke: #572923; stroke-width: 4; }
-		#scene-adjusted .chimney { fill: #774338; stroke: #542d27; stroke-width: 2; }
-		#scene-adjusted .door { fill: #68432f; stroke: #442c20; stroke-width: 2; }
-		#scene-adjusted .window { fill: #a1d9e5; stroke: #493e32; stroke-width: 5; }
-		#scene-adjusted .window-divider { stroke: #493e32; stroke-width: 3; }
-		#scene-adjusted .fence polyline,
-		#scene-adjusted .fence line { stroke: #405d39; stroke-width: 4; stroke-dasharray: 8 5; }
-		#scene-adjusted .garden-path { fill: #9c998b; stroke: #55564f; stroke-width: 2; }
-		#scene-adjusted .stone-walkway { fill: #c9c7b9; stroke: #55564f; stroke-width: 2; }
-		#scene-adjusted .stone-joint { fill: none; stroke: #8d8c82; stroke-width: 2; }
-		#scene-adjusted .mailbox { fill: #315f78; stroke: #193d52; stroke-width: 2; }
-		#scene-adjusted .smoke { fill: #fff; fill-opacity: 0.6; stroke: #82939a; stroke-width: 1.5; }
-		#scene-adjusted .caption { fill: #234f31; stroke: none; font-weight: bold; }
-	</style>
+        /* Main Content Layout */
+        main {
+            flex: 1;
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            color: #0f172a;
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            line-height: 1.6;
+            color: #475569;
+        }
+
+        /* SVG and Scene Styling */
+        svg {
+            display: block;
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            border: 2px solid #536b61;
+            border-radius: 6px;
+            background: #d9f0f7;
+            margin-top: 1.5rem;
+        }
+
+        #scene-annotated #annotations {
+            font-size: 12px;
+            fill: #333;
+            stroke: #999;
+            stroke-width: 1;
+            pointer-events: none;
+        }
+
+        #scene-annotated #annotations text {
+            stroke: none;
+        }
+
+        /* Adjusted Scene Palette */
+        #scene-adjusted .sky { fill: #c6e5f2; }
+        #scene-adjusted .lawn { fill: #75ad59; }
+        #scene-adjusted .tree-trunk { fill: #69452e; stroke: #49321f; stroke-width: 2; }
+        #scene-adjusted .tree-canopy { fill: #347b45; stroke: #205632; stroke-width: 2; }
+        #scene-adjusted .house-body { fill: #f3cb7c; stroke: #70472f; stroke-width: 3; }
+        #scene-adjusted .roof { fill: #913f35; stroke: #572923; stroke-width: 4; }
+        #scene-adjusted .chimney { fill: #774338; stroke: #542d27; stroke-width: 2; }
+        #scene-adjusted .door { fill: #68432f; stroke: #442c20; stroke-width: 2; }
+        #scene-adjusted .window { fill: #a1d9e5; stroke: #493e32; stroke-width: 5; }
+        #scene-adjusted .window-divider { stroke: #493e32; stroke-width: 3; }
+        #scene-adjusted .fence polyline,
+        #scene-adjusted .fence line { stroke: #405d39; stroke-width: 4; stroke-dasharray: 8 5; }
+        #scene-adjusted .garden-path { fill: #9c998b; stroke: #55564f; stroke-width: 2; }
+        #scene-adjusted .stone-walkway { fill: #c9c7b9; stroke: #55564f; stroke-width: 2; }
+        #scene-adjusted .stone-joint { fill: none; stroke: #8d8c82; stroke-width: 2; }
+        #scene-adjusted .mailbox { fill: #315f78; stroke: #193d52; stroke-width: 2; }
+        #scene-adjusted .smoke { fill: #fff; fill-opacity: 0.6; stroke: #82939a; stroke-width: 1.5; }
+        #scene-adjusted .caption { fill: #234f31; stroke: none; font-weight: bold; }
+
+        /* Footer Styling */
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            background-color: #1e293b;
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-top: auto;
+        }
+    </style>
 </head>
 <body>
-  <!-- Keep your existing nav/header here -->
-  </header>
 
-  <h1>Appliance Energy Consumption</h1>
-  <div id="content"></div>
+    <!-- Header & Navigation Menu -->
+    <header>
+      <nav class="navbar">
+        <a href="#" class="logo">⚡ Energy Dashboard</a>
+        <ul class="nav-links">
+          <li><a href="#" class="active">Home</a></li>
+        </ul>
+      </nav>
+    </header>
 
-  <!-- Give the SVG a size so shapes can be seen -->
-  <svg width="300" height="150"></svg>
+    <!-- Main Content Wrapper -->
+    <main>
+      <h1>Appliance Energy Consumption</h1>
+      
+      <!-- D3 target div -->
+      <div id="content"></div>
 
-  <!-- Load D3 first, then your D3 code file -->
-  <script src="https://d3js.org/d3.v7.min.js"></script>
-  <script src="energy-d3.js"></script>
+      <!-- Give the SVG a size so shapes can be seen -->
+      <svg width="300" height="150"></svg>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <p>&copy; 2026 Appliance Energy Project</p>
+    </footer>
+
+    <!-- Load D3 first, then your D3 code file -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="energy-d3.js"></script>
 </body>
 </html>
